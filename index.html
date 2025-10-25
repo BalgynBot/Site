@@ -73,7 +73,7 @@
          color: var(--white);
          padding: 100px 0 60px 0;
          text-align: center;
-         clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+         /* ИСПРАВЛЕНИЕ: УБРАН clip-path для ровного фона */
       }
 
       #hero h1 {
@@ -268,7 +268,7 @@
          color: var(--primary-color);
          font-weight: 600;
       }
-
+      
       /* 5. ПРИМЕНЕНИЕ И ПЕРСПЕКТИВЫ */
       .future-list {
          list-style: none;
@@ -352,59 +352,48 @@
 
          /* НОВЫЕ СТИЛИ ДЛЯ РАБОТЫ С НЕСКОЛЬКИМИ ИЗОБРАЖЕНИЯМИ */
          .image-gallery-mobile-scroll {
-            display: flex;
-            /* Делаем их строкой */
-            gap: 10px;
-            /* Добавляем небольшой отступ между изображениями */
-            overflow-x: auto;
-            /* Разрешаем горизонтальную прокрутку */
-            padding-bottom: 5px;
-            /* Небольшой отступ, чтобы не обрезался скроллбар */
-            width: 100%;
-            /* Занимаем всю ширину */
-            justify-content: flex-start;
-            /* Начинаем слева */
+            display: flex; /* Делаем их строкой */
+            gap: 10px; /* Добавляем небольшой отступ между изображениями */
+            overflow-x: auto; /* Разрешаем горизонтальную прокрутку */
+            padding-bottom: 5px; /* Небольшой отступ, чтобы не обрезался скроллбар */
+            width: 100%; /* Занимаем всю ширину */
+            justify-content: flex-start; /* Начинаем слева */
          }
 
          /* Изображения внутри галереи */
          .image-gallery-mobile-scroll img {
-            min-width: 80%;
-            /* Каждое изображение занимает 80% ширины, чтобы можно было скроллить */
+            min-width: 80%; /* Каждое изображение занимает 80% ширины, чтобы можно было скроллить */
             height: auto;
          }
 
          /* Скрываем второе и последующие изображения, если не нужен скролл */
          .hide-on-mobile {
-            display: none !important;
+             display: none !important;
          }
-
-         /* Исправление: Одиночные изображения в плейсхолдере (например, AI block), чтобы они занимали всю ширину */
-         .image-placeholder-small img:not(.image-gallery-mobile-scroll img):not(.hide-on-mobile) {
-            max-width: 100% !important;
-            height: 100% !important;
-            object-fit: contain;
-            /* Важно: переопределяем инлайн-стили, которые могли быть слишком ограничительными */
+         
+         /* Для одиночных изображений в плейсхолдере, чтобы они занимали всю ширину */
+         .image-placeholder-small > img:not(.image-gallery-mobile-scroll img):not(.hide-on-mobile) {
+             /* Указываем родителю, что он должен быть flex-контейнером, если внутри только 1 картинка, чтобы она центрировалась */
+             width: 100% !important;
+             height: 100% !important;
+             object-fit: contain;
          }
       }
-
+      
       /* Стили для экранов более 768px (Ноутбуки) */
       @media (min-width: 769px) {
-
          /* Галереи на ноутбуках: возвращаем flex-контейнеры к нормальному поведению */
          .image-gallery-mobile-scroll {
-            display: flex;
-            overflow-x: visible;
+             display: flex;
+             overflow-x: visible;
          }
-
          /* Изображения внутри галереи */
          .image-gallery-mobile-scroll img {
-            min-width: auto;
-            /* Отменяем 80% ширины */
+            min-width: auto; /* Отменяем 80% ширины */
          }
-
+         /* Показываем скрытые на мобильном изображения */
          .hide-on-mobile {
             display: block !important;
-            /* Показываем скрытые на мобильном изображения */
          }
       }
    </style>
@@ -474,13 +463,12 @@
       <h2>Умная Навигация и Абсолютная Безопасность</h2>
       <div class="ai-blocks">
          <div class="ai-image">
-            <div class="image-placeholder-small"
-               style="height: 300px; display: flex; justify-content: center; align-items: center;">
+            <div class="image-placeholder-small image-gallery-mobile-scroll" style="height: 300px;">
                <img src="WhatsApp Image 2025-09-16 at 22.41.18.jpeg" alt="Робот в движении"
-                  style="max-width:80%;height:80%;border-radius:8px;border:3px solid var(--accent-color);">
-
-               <img class="hide-on-mobile" src="WhatsApp Image 2025-09-16 at 22.27.39.jpeg" alt="Детали робота"
-                  style="max-width:80%;height:80%;border-radius:8px;border:3px solid var(--accent-color);">
+                  style="max-width:50%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+               
+               <img src="WhatsApp Image 2025-09-16 at 22.27.39.jpeg" alt="Детали робота"
+                  style="max-width:50%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
             </div>
          </div>
          <div class="ai-content">
