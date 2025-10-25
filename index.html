@@ -73,7 +73,7 @@
          color: var(--white);
          padding: 100px 0 60px 0;
          text-align: center;
-         /* ИСПРАВЛЕНИЕ: УБРАН clip-path для ровного фона */
+         /* ИСПРАВЛЕНО: УБРАН clip-path для ровного фона */
       }
 
       #hero h1 {
@@ -350,7 +350,7 @@
             height: 200px;
          }
 
-         /* НОВЫЕ СТИЛИ ДЛЯ РАБОТЫ С НЕСКОЛЬКИМИ ИЗОБРАЖЕНИЯМИ */
+         /* НОВЫЕ СТИЛЫ ДЛЯ РАБОТЫ СО СКРОЛЛ-ГАЛЕРЕЯМИ */
          .image-gallery-mobile-scroll {
             display: flex; /* Делаем их строкой */
             gap: 10px; /* Добавляем небольшой отступ между изображениями */
@@ -358,22 +358,24 @@
             padding-bottom: 5px; /* Небольшой отступ, чтобы не обрезался скроллбар */
             width: 100%; /* Занимаем всю ширину */
             justify-content: flex-start; /* Начинаем слева */
+            align-items: stretch; 
          }
 
          /* Изображения внутри галереи */
          .image-gallery-mobile-scroll img {
             min-width: 80%; /* Каждое изображение занимает 80% ширины, чтобы можно было скроллить */
-            height: auto;
+            max-width: none; /* Убираем ограничение max-width для мобильного */
+            height: 90%; 
+            object-fit: contain;
          }
-
+         
          /* Скрываем второе и последующие изображения, если не нужен скролл */
          .hide-on-mobile {
              display: none !important;
          }
          
-         /* Для одиночных изображений в плейсхолдере, чтобы они занимали всю ширину */
+         /* Для одиночных изображений в плейсхолдере */
          .image-placeholder-small > img:not(.image-gallery-mobile-scroll img):not(.hide-on-mobile) {
-             /* Указываем родителю, что он должен быть flex-контейнером, если внутри только 1 картинка, чтобы она центрировалась */
              width: 100% !important;
              height: 100% !important;
              object-fit: contain;
@@ -386,14 +388,34 @@
          .image-gallery-mobile-scroll {
              display: flex;
              overflow-x: visible;
+             /* ИСПРАВЛЕНО: Теперь просто центрируем и добавляем gap */
+             justify-content: center; /* Центрируем изображения */
+             gap: 20px; /* Добавляем небольшой зазор между ними */
+             align-items: center;
          }
          /* Изображения внутри галереи */
          .image-gallery-mobile-scroll img {
             min-width: auto; /* Отменяем 80% ширины */
+            height: 100%;
+            object-fit: contain;
          }
          /* Показываем скрытые на мобильном изображения */
          .hide-on-mobile {
             display: block !important;
+         }
+
+         /* СПЕЦИАЛЬНЫЕ ПРАВИЛА ДЛЯ ИЗОБРАЖЕНИЙ НА НОУТБУКЕ: */
+         /* 1. AI-изображения (2 шт.) */
+         #ai-safety .ai-image img {
+            max-width: 45%; 
+         }
+         /* 2. Feature-изображения (3 шт.) */
+         #features .image-gallery-mobile-scroll img {
+            max-width: 30%; 
+         }
+         /* 3. Comparison-изображения (2 шт.) */
+         .comparison-image img {
+            max-width: 45%; 
          }
       }
    </style>
@@ -449,13 +471,13 @@
                установлен в задней части корпуса для равномерного распределения влаги.</p>
          </div>
       </div>
-      <div class="image-placeholder-small image-gallery-mobile-scroll" style="height: 250px;">
+      <div class="image-placeholder-small image-gallery-mobile-scroll" style="height: 250px; padding: 10px;">
          <img src="Снимок экрана 2025-10-25 в 21.15.22.jpg.png" alt="Схема очистки"
-            style="max-width:33%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+            style="border-radius:8px;border:3px solid var(--accent-color);">
          <img src="Снимок экрана 2025-10-25 в 21.26.14.png" alt="Схема дезинфекции"
-            style="max-width:33%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+            style="border-radius:8px;border:3px solid var(--accent-color);">
          <img src="Снимок экрана 2025-10-25 в 21.28.18.png" alt="Схема увлажнения"
-            style="max-width:33%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+            style="border-radius:8px;border:3px solid var(--accent-color);">
       </div>
    </section>
 
@@ -463,12 +485,12 @@
       <h2>Умная Навигация и Абсолютная Безопасность</h2>
       <div class="ai-blocks">
          <div class="ai-image">
-            <div class="image-placeholder-small image-gallery-mobile-scroll" style="height: 300px;">
+            <div class="image-placeholder-small image-gallery-mobile-scroll" style="height: 300px; padding: 10px;">
                <img src="WhatsApp Image 2025-09-16 at 22.41.18.jpeg" alt="Робот в движении"
-                  style="max-width:50%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+                  style="border-radius:8px;border:3px solid var(--accent-color);">
                
                <img src="WhatsApp Image 2025-09-16 at 22.27.39.jpeg" alt="Детали робота"
-                  style="max-width:50%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+                  style="border-radius:8px;border:3px solid var(--accent-color);">
             </div>
          </div>
          <div class="ai-content">
@@ -508,11 +530,11 @@
       <p style="margin-top: 20px; font-weight: 600;">Гипотеза подтверждена: мобильный подход BalǵynBot признан
          оптимальным решением.</p>
 
-      <div class="comparison-image image-gallery-mobile-scroll" style="height: 250px;">
+      <div class="comparison-image image-gallery-mobile-scroll" style="height: 250px; padding: 10px;">
          <img src="Снимок экрана 2025-10-25 в 21.35.51.png" alt="График стационарного прибора"
-            style="max-width:49%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+            style="border-radius:8px;border:3px solid var(--accent-color);">
          <img src="Снимок экрана 2025-10-25 в 21.36.07.png" alt="График BalǵynBot"
-            style="max-width:49%;height:100%;border-radius:8px;border:3px solid var(--accent-color);">
+            style="border-radius:8px;border:3px solid var(--accent-color);">
       </div>
    </section>
 
